@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<center>
+	
+	<h1>Thank You Dear Customer To Shop from Our Website</h1>
+
+	<h4>{{user.name}}'s Trasction Details</h4>
+
+	<p>Order Id : {{trans.razorpay_order_id}}</p>
+
+	{% for i in cart %}
+	
+	<p>Product : {{cart.package.pname}} | price : {{cart.package.price}}</p>
+
+	{% endfor %}
+
+	<p>Total Amout Paid : {{trans.amount}}</p>
+
+</center>
+
+
+{% endblock %}

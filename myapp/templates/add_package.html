@@ -1,0 +1,61 @@
+{% extends 'admin_dash_base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Add Packages</h1>
+                            </div>
+                            <form action="{% url 'add_package' %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <select name="techno_type">
+                                        
+                                        <option>---select technology---</option>
+                                        {% for i in techno %}
+                                        <option value="{{i.techno_area}}">{{i.techno_area}}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="pname" 
+                                        placeholder="Enter Package Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="exampleInputEmail" name="price" 
+                                        placeholder="Add Package Price">
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control form-control-user" id="exampleInputEmail" name="image">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="desc" rows="6" cols="59"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Add Package" >
+                                </div>
+                                
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   </div>
+{% endblock %}

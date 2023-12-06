@@ -1,0 +1,79 @@
+{% extends 'admin_dash_base.html' %}
+
+{% load static %}
+{% block content %}
+
+<!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-2">Add Your Work</h1>
+                                        <p class="mb-4">Share Your Work</p>
+                                    </div>
+                                    <form class="user" action="{% url 'work_space' %}" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <p class="mb-4">Select Technology</p>
+
+                                            <select class="form-control form-control-user" id="exampleInputEmail" name='techno_area'>
+                                                <option>===select Techno===</option>
+                                                {% for i in techno %}
+                                                <option style="color: black;" value="{{i.techno_area}}">{{i.techno_area}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="mb-4">Add Title</p>
+
+                                            <input type="text" class="form-control form-control-user"
+                                                id="exampleInputEmail" name="title" aria-describedby="emailHelp" placeholder="Enter Project Title...">
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="mb-4">Add Price</p>
+
+                                            <input type="number" class="form-control form-control-user"
+                                                id="exampleInputEmail" name="price" aria-describedby="emailHelp" placeholder="Enter Project Price...">
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="mb-4">Front Image : </p>
+                                            <input type="file" class="form-control form-control-user"
+                                                id="exampleInputEmail" name="image" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="mb-4">Project File : </p>
+                                            <input type="file" class="form-control form-control-user"
+                                                id="exampleInputEmail" name="demo_website" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="form-group" id="desc">
+                                            {{ form.media }}
+                                            {{ form.as_p }}
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary btn-user btn-block" value="Add Work" >
+                                        </div>
+                                    </form>
+
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+{% endblock %}
+
+

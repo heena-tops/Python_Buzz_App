@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <!-- Start Banner Hero -->
+    <div id="work_single_banner" class="bg-light w-100">
+        <div class="container-fluid text-light d-flex justify-content-center align-items-center border-0 rounded-0 p-0 py-5">
+            <div class="banner-content col-lg-8 m-lg-auto text-center py-5 px-3">
+                <h1 class="banner-heading h2 pb-5 typo-space-line-center">{{blog.title}}</h1>
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Banner Hero -->
+
+    <!-- Start Work Sigle -->
+    <section class="container py-5">
+
+        <div class="row pt-5">
+            <div class="worksingle-content col-lg-8 m-auto text-left justify-content-center">
+                <h2 class="worksingle-heading h3 pb-3 light-300 typo-space-line">{{blog.title}}</h2>
+                <p></p>
+            </div>
+        </div><!-- End Blog Cover -->
+
+        <div class="row justify-content-center pb-4">
+            <div class="col-lg-8">
+                <div id="templatemo-slide-link-target" class="card mb-3">
+                    <img class="img-fluid border rounded" src="{{blog.image.url}}" alt="Card image cap">
+                </div>
+                
+            </div>
+        </div><!-- End Slider -->
+
+        
+
+
+        <div class="row">
+            <div class="col-md-8 m-auto text-left justify-content-center">
+                
+                <p class="text-muted light-300">
+                    {{blog.desc}}
+                </p>
+            </div>
+        </div><!-- End Qute -->
+
+
+        
+        <!-- Start Comment -->
+        <div class="row justify-content-center">
+            <div class="worksingle-comment-heading col-8 m-auto pb-3">
+                <h4 class="h5">Comments</h4>
+            </div>
+        </div>
+
+        {% for i in comments %}
+        <div class="row pb-4">
+            <div class="worksingle-comment-body col-md-8 m-auto">
+                <div class="d-flex">
+                    <div>
+                        
+                    </div>
+                    <div class="comment-body">
+                        <div class="comment-header d-flex justify-content-between ms-3">
+                            <div class="header text-start">
+                                <h5 class="h6">{{i.name}}</h5>
+                                <p class="text-muted light-300">{{i.dop}}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="footer">
+                            <div class="card-body border ms-3 light-300">
+                                {{i.comment}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Comment -->
+        {% endfor %}
+
+
+        <div class="row pb-4">
+            <div class="worksingle-comment-footer col-lg-8 m-auto">
+                <h4 class="h5">Leave Comment</h4>
+                <form class="col-md-12 m-auto" method="post" action="{% url 'post_comment' pk=blog.pk %}" role="form">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="pb-2 pt-sm-0 pt-4 light-300" for="inputmessage">Your Comment</label>
+                        <textarea class="form-control form-control-lg light-300" id="inputmessage" name="comment" placeholder="Your Comment" rows="5"></textarea>
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col-lg-6">
+                            <label class="pb-2 light-300" for="inputname">Name</label>
+                            <input type="text" class="form-control form-control-lg light-300" id="inputname" name="name" placeholder="Name">
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="pb-2 pt-sm-0 pt-4 light-300" for="inputemail">Email</label>
+                            <input type="email" class="form-control form-control-lg light-300" id="inputemail" name="email" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="form-row pt-2">
+                        <div class="col-md-12 col-10 text-end">
+                            <input type="submit" class="btn btn-secondary text-white px-md-4 px-2 py-md-3 py-1 radius-0 light-300" value="Post Comment">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- End Comment Form -->
+
+
+    </section>
+    <!-- End Work Sigle -->
+
+    <!-- Start Related Post -->
+    <article class="container-fluid bg-light">
+        <div class="container">
+            <div class="worksingle-related-header row">
+                <h1 class="h2 py-5">Related Post</h1>
+                <div class="col-md-12 text-left justify-content-center">
+                    <div class="row gx-5">
+
+                        {% for i in all_blogs %}
+                        <div class="col-sm-6 col-lg-4 mb-5">
+                            <a href="#" class="related-content card text-decoration-none overflow-hidden h-100">
+                                <img class="related-img card-img-top" src="{{i.image.url}}" alt="Card image cap" height="270">
+                                <div class="related-body card-body p-4">
+                                    <h5 class="card-title h6 m-0 semi-bold-600 text-dark">{{i.title}}</h5>
+                                    <p class="card-text pt-2 mb-1 light-300 text-dark">
+                                        {{i.desc|slice:100}}...
+                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-primary light-300">Read more</span>
+                                        <div class="light-300">
+                                            <i class='bx-fw bx bx-heart me-1'></i>{{i.like_count}}
+                                            <i class='bx-fw bx bx-chat    ms-1 me-1'></i>{{request.session.c_count}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+
+    </article>
+    <!-- End Related Post -->
+
+{% endblock %}

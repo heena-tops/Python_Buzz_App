@@ -1,0 +1,59 @@
+{% extends 'admin_dash_base.html' %}
+
+{% load static %}
+{% block content %}
+
+{% if msg %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h4 class="h3 mb-4 text-gray-800">{{msg}}</h4>
+
+</div>
+
+{% else %}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">All Packages of {{techno.techno_area}}</h1>
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+        {% for i in package %}
+
+        <div class="col-xl-3 col-md-6 mb-4 m-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">{{i.pname}}({{i.techno.service_type}})
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">₹{{i.price}}</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{i.techno}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto d-block">
+                        	<ul style="list-style: none;">
+                        		
+                        		<a href="{% url 'delete_package' pk=i.pk %}"><li style="padding-bottom: 10px;"><i class="fa fa-trash"></i></li></a>
+                                <a href="{% url 'update_package' pk=i.pk %}"><li><i class="fa fa-pen"></i></li></a>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
